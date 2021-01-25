@@ -3,7 +3,7 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody,
     CardTitle } from 'reactstrap';
 
 
-class SelectedDish extends Component{
+class DishDetail extends Component{
 
 	constructor(props)
 	{
@@ -30,4 +30,4 @@ class SelectedDish extends Component{
 	}
 }
 
-export default SelectedDish;
+export default DishDetail;
