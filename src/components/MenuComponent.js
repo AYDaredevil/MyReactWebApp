@@ -17,6 +17,28 @@ class Menu extends Component {
         this.setState({ selectedDish: dish});
     }
 
+    renderComments(dish)
+    {
+    	if(dish == null || dish.comments == null)
+    		return(
+    			<div></div>
+    			);
+    	let options = {year : "numeric", month : "short", day: "numeric"};
+    	const comment = dish.comments.map((cmnt) => {
+    		return(
+    			<div class = "list-unstyled">
+    				<li>{cmnt.comment}</li>
+					<li>-- {cmnt.author}{" "} {new Date(cmnt.date).toLocaleDateString("en-US", options)} </li>
+    			</div>
+    		);
+    	});
+    	return(
+    		<div>
+    			<h4> Comments </h4>
+    			{comment}
+    		</div>
+    	);
+    }
     render() {
         const menu = this.props.dishes.map((dish) => {
             return (
@@ -40,6 +62,9 @@ class Menu extends Component {
                 <div className="row">
                   <div  className="col-12 col-md-5 m-1">
                     <DishDetail dish={this.state.selectedDish}/>
+                  </div>
+                  <div className="col-12 col-md-5 m-1">
+                  	{this.renderComments(this.state.selectedDish)}
                   </div>
                 </div>
             </div>
