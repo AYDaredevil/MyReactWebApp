@@ -5,14 +5,16 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody,
 
 class DishDetail extends Component{
 
-	renderComments(dish)
+	renderComments(comments)
     {
-        if(dish == null || dish.comments == null)
-                return(
-                        <div></div>
-                        );
+        if(comments == null )
+        {
+        	return(
+                    <div></div>
+                );
+        }
         let options = {year : "numeric", month : "short", day: "numeric"};
-        const comment = dish.comments.map((cmnt) => {
+        const comment = comments.map((cmnt) => {
                 return(
                         <div class = "list-unstyled">
                                 <li>{cmnt.comment}</li>
@@ -31,6 +33,7 @@ class DishDetail extends Component{
 	render()
 	{
 		const dish = this.props.dish;
+		const comment = this.props.comment;
 		if (dish != null)
 		{
             return(
@@ -46,7 +49,7 @@ class DishDetail extends Component{
                 </Card>
                 </div>
                 <div  className="col-12 col-md-5 m-1">
-                	{this.renderComments(dish)}
+                	{this.renderComments(comment)}
                 </div>
                 </div>
                 </div>
