@@ -23,7 +23,7 @@ class DishDetail extends Component{
     handleComment(values)
     {
         console.log(values);
-        this.props.addComment(this.props.dish.id, values.rating, values.yourname, values.comment);
+        this.props.postComment(this.props.dish.id, values.rating, values.yourname, values.comment);
         this.toggleModal();
     }
     toggleModal()
