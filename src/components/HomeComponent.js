@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle} from 'reactstrap';
+import { baseUrl } from '../shared/baseUrl';
 import { Loading } from './LoadingComponent';
 
 class Home extends Component{
@@ -26,7 +27,7 @@ class Home extends Component{
         else if(item){
             return(
                 <Card>
-                    <CardImg src={item.image} alt={item.name} />
+                    <CardImg src={baseUrl + '/'+ item.image} alt={item.name} />
                     <CardBody>
                         <CardTitle>{item.name}</CardTitle>
                         {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null }
