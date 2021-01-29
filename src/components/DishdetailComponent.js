@@ -20,8 +20,8 @@ class DishDetail extends Component{
 
     handleComment(values)
     {
-        console.log('Current State is: ' + JSON.stringify(values));
-        alert('Current State is: ' + JSON.stringify(values));
+        console.log(values);
+        this.props.addComment(this.props.dish.id, values.rating, values.yourname, values.comment);
         this.toggleModal();
     }
     toggleModal()
@@ -76,7 +76,7 @@ class DishDetail extends Component{
                             <Row className="form-group">
                             <Label htmlFor="comment" md={12}>Comment</Label>
                                 <Col md={10}>
-                                    <Control.textarea model=".commment" id="comment" name="commment"
+                                    <Control.textarea model=".comment" id="comment" name="comment"
 										placeholder="Comment" rows="6"
 										className = "form-control"
                                     />                            
@@ -125,7 +125,7 @@ class DishDetail extends Component{
 	render()
 	{
 		const dish = this.props.dish;
-		const comment = this.props.comment;
+		const comment = this.props.comments;
 		if (dish != null)
 		{
             return(
