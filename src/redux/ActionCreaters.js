@@ -1,4 +1,5 @@
 import * as ActionTypes from './ActionTypes';
+import { DISHES } from '../shared/dishes';
 
  export const addComment = (dishId, rating, author, comment) => ({
      type : ActionTypes.ADD_COMMENT,
@@ -8,4 +9,25 @@ import * as ActionTypes from './ActionTypes';
          author :  author,
          comment : comment
      }
- })
+ });
+
+ export const addDishes = (dishes) => ({
+     type : ActionTypes.ADD_DISHES,
+     payload : dishes
+ });
+
+ export const dishesLoading = () => ({
+    type : ActionTypes.DISHES_LOADING
+ });
+
+ export const dishesFailed = () => ({
+     type : ActionTypes.DISHES_FAILED
+ });
+
+ export const fetchDishes = () => (dispatch) => {
+     dispatch(dishesLoading(true));
+
+     setTimeout(() => {
+        dispatch(addDishes(DISHES));
+     },2000);
+ }
