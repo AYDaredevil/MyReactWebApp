@@ -39,6 +39,31 @@ export const postComment = (dishId, rating, author, comment) => (dispatch) => {
     .catch(error =>  { console.log('post comments', error.message); alert('Your comment could not be posted\nError: '+error.message); });
  }
 
+ export const postFeedback = (feedback) => (dispatch) => {
+    return fetch(baseUrl + '/feedback', {
+        method: "POST",
+        body: JSON.stringify(feedback),
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "same-origin"
+    })
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            throw error;
+      })
+    .then(response => response.json())
+    .then(response => { alert(JSON.stringify(response)); console.log(response); })
+    .catch(error =>  { console.log('post comments', error.message); alert('Your comment could not be posted\nError: '+error.message); });
+ }
  // Dishes
  export const addDishes = (dishes) => ({
      type : ActionTypes.ADD_DISHES,
@@ -49,8 +74,9 @@ export const postComment = (dishId, rating, author, comment) => (dispatch) => {
     type : ActionTypes.DISHES_LOADING
  });
 
- export const dishesFailed = () => ({
-     type : ActionTypes.DISHES_FAILED
+ export const dishesFailed = (errMess) => ({
+     type : ActionTypes.DISHES_FAILED,
+     payload : errMess
  });
 
  export const fetchDishes = () => (dispatch) => {
@@ -83,8 +109,9 @@ export const addComments = (comments) => ({
     payload : comments
 });
 
-export const commentsFailed = () => ({
-    type : ActionTypes.COMMENTS_FAILED
+export const commentsFailed = (errMess) => ({
+    type : ActionTypes.COMMENTS_FAILED,
+    payload : errMess
 });
 
 export const fetchComments = () => (dispatch) => {
@@ -120,8 +147,9 @@ export const promosLoading = () => ({
    type : ActionTypes.PROMOS_LOADING
 });
 
-export const promosFailed = () => ({
-    type : ActionTypes.PROMOS_FAILED
+export const promosFailed = (errMess) => ({
+    type : ActionTypes.PROMOS_FAILED,
+    payload : errMess
 });
 
 export const fetchPromos = () => (dispatch) => {
@@ -146,4 +174,44 @@ export const fetchPromos = () => (dispatch) => {
        .then(response => response.json())
        .then(promos => dispatch(addPromos(promos)))
        .catch(error => dispatch(promosFailed(error.message)));
+}
+
+
+//Leaders
+export const addLeaders = (leaders) => ({
+    type : ActionTypes.ADD_LEADERS,
+    payload : leaders
+});
+
+export const leadersLoading = () => ({
+   type : ActionTypes.LEADERS_LOADING
+});
+
+export const leadersFailed = (errMess) => ({
+    type : ActionTypes.LEADERS_FAILED,
+    payload : errMess
+});
+
+export const fetchLeaders = () => (dispatch) => {
+    dispatch(leadersLoading(true));
+
+    fetch(baseUrl + '/leaders')
+        .then(response => {
+            if(response.ok)
+            {
+                return response;
+            }
+            else{
+                var error = new Error("Error :" + response.status + ":" + response.message)
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+            var errormess = new Error(error.message);
+            throw errormess;
+        })
+       .then(response => response.json())
+       .then(promos => dispatch(addLeaders(promos)))
+       .catch(error => dispatch(leadersFailed(error.message)));
 }
