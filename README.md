@@ -3,7 +3,8 @@ This project was bootstrapped with Create React App.
 # Front-End Javascript Frameworks: React
 
 This project is from the React course opened on [Coursera](https://www.coursera.org/learn/front-end-react).
-[Certificate]{https://www.coursera.org/account/accomplishments/verify/27CY296Z9G7T} for successful completion of the course.
+
+[Certificate](https://www.coursera.org/account/accomplishments/verify/27CY296Z9G7T) for successful completion of the course.
 
 ## Description
 
